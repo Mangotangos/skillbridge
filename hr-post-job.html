@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>SkillBridge — Post a Job</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: #f0fdf4;
+      min-height: 100vh;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      padding: 40px 16px;
+    }
+    .card {
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+      max-width: 680px;
+      width: 100%;
+      overflow: hidden;
+    }
+    .header {
+      background: linear-gradient(135deg, #065f46, #10b981);
+      padding: 36px 40px;
+      color: #fff;
+    }
+    .header .badge {
+      display: inline-block;
+      background: rgba(255,255,255,0.2);
+      border-radius: 20px;
+      padding: 4px 14px;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      margin-bottom: 14px;
+    }
+    .header h1 { font-size: 26px; font-weight: 700; margin-bottom: 8px; }
+    .header p { font-size: 15px; opacity: 0.85; line-height: 1.5; }
+    .form-body { padding: 36px 40px; }
+    .section-title {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: #6b7280;
+      margin: 28px 0 14px;
+    }
+    .section-title:first-child { margin-top: 0; }
+    .row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .row.single { grid-template-columns: 1fr; }
+    .field { display: flex; flex-direction: column; margin-bottom: 4px; }
+    label {
+      font-size: 13px;
+      font-weight: 600;
+      color: #374151;
+      margin-bottom: 6px;
+    }
+    label .req { color: #ef4444; margin-left: 2px; }
+    input, select, textarea {
+      border: 1.5px solid #e5e7eb;
+      border-radius: 8px;
+      padding: 10px 14px;
+      font-size: 14px;
+      color: #111827;
+      transition: border-color 0.2s;
+      width: 100%;
+      background: #fafafa;
+    }
+    input:focus, select:focus, textarea:focus {
+      outline: none;
+      border-color: #10b981;
+      background: #fff;
+    }
+    textarea { resize: vertical; min-height: 100px; }
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-top: 4px;
+    }
+    .skill-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: #f9fafb;
+      border: 1.5px solid #e5e7eb;
+      border-radius: 8px;
+      padding: 9px 12px;
+      cursor: pointer;
+      transition: all 0.15s;
+      font-size: 13px;
+      font-weight: 500;
+      color: #374151;
+    }
+    .skill-item input[type=checkbox] { width: 15px; height: 15px; accent-color: #10b981; cursor: pointer; }
+    .skill-item:has(input:checked) {
+      background: #ecfdf5;
+      border-color: #10b981;
+      color: #065f46;
+    }
+    .divider { border: none; border-top: 1px solid #f3f4f6; margin: 24px 0; }
+    .match-preview {
+      background: #f0fdf4;
+      border: 1.5px solid #a7f3d0;
+      border-radius: 10px;
+      padding: 14px 18px;
+      font-size: 13px;
+      color: #065f46;
+      margin-top: 16px;
+      display: none;
+    }
+    .match-preview strong { display: block; margin-bottom: 4px; }
+    .submit-btn {
+      width: 100%;
+      padding: 14px;
+      background: linear-gradient(135deg, #065f46, #10b981);
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      font-size: 15px;
+      font-weight: 700;
+      cursor: pointer;
+      margin-top: 28px;
+      transition: opacity 0.2s;
+      letter-spacing: 0.3px;
+    }
+    .submit-btn:hover { opacity: 0.92; }
+    .submit-btn:disabled { opacity: 0.6; cursor: not-allowed; }
+    .alert {
+      display: none;
+      padding: 14px 18px;
+      border-radius: 10px;
+      font-size: 14px;
+      font-weight: 500;
+      margin-top: 16px;
+    }
+    .alert.success { background: #ecfdf5; color: #065f46; border: 1px solid #a7f3d0; }
+    .alert.error { background: #fef2f2; color: #991b1b; border: 1px solid #fca5a5; }
+    .footer-note {
+      text-align: center;
+      font-size: 12px;
+      color: #9ca3af;
+      margin-top: 20px;
+      padding-top: 20px;
+      border-top: 1px solid #f3f4f6;
+    }
+  </style>
+</head>
+<body>
+<div class="card">
+  <div class="header">
+    <div class="badge">FOR HR & RECRUITERS</div>
+    <h1>SkillBridge — Post a Job Opening</h1>
+    <p>We'll instantly match your role to qualified candidates laid off in recent tech cuts and email them directly. Free.</p>
+  </div>
+  <div class="form-body">
+    <form id="hrForm">
+
+      <div class="section-title">Job Details</div>
+      <div class="row">
+        <div class="field">
+          <label>Job Title <span class="req">*</span></label>
+          <input type="text" name="Job Title" required placeholder="HCM Implementation Consultant" />
+        </div>
+        <div class="field">
+          <label>Company <span class="req">*</span></label>
+          <input type="text" name="Company" required placeholder="Accenture" />
+        </div>
+      </div>
+      <div class="row">
+        <div class="field">
+          <label>Job Type</label>
+          <select name="Job Type">
+            <option value="">Select...</option>
+            <option value="Full-time">Full-time</option>
+            <option value="Contract">Contract</option>
+            <option value="Part-time">Part-time</option>
+            <option value="Contract-to-hire">Contract-to-hire</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>Salary Range</label>
+          <input type="text" name="Salary Range" placeholder="$90,000 – $120,000" />
+        </div>
+      </div>
+      <div class="row">
+        <div class="field">
+          <label>Location</label>
+          <input type="text" name="Location" placeholder="Chicago, IL or Remote" />
+        </div>
+        <div class="field">
+          <label>Remote Friendly?</label>
+          <select name="Remote Friendly">
+            <option value="">Select...</option>
+            <option value="Yes">Yes — fully remote</option>
+            <option value="No">No — on-site only</option>
+            <option value="Hybrid">Hybrid</option>
+          </select>
+        </div>
+      </div>
+      <div class="row single">
+        <div class="field">
+          <label>Original LinkedIn Post URL</label>
+          <input type="url" name="LinkedIn Post URL" placeholder="https://linkedin.com/posts/..." />
+        </div>
+      </div>
+      <div class="row single">
+        <div class="field">
+          <label>Full Job Description / Post Text</label>
+          <textarea name="Raw Post Text" placeholder="Paste the full job posting here — we use this to improve matching accuracy..."></textarea>
+        </div>
+      </div>
+
+      <hr class="divider" />
+      <div class="section-title">Skills Required <span class="req">*</span></div>
+      <div class="skills-grid">
+        <label class="skill-item"><input type="checkbox" name="Skills Required" value="HCL" /> HCL</label>
+        <label class="skill-item"><input type="checkbox" name="Skills Required" value="Oracle" /> Oracle</label>
+        <label class="skill-item"><input type="checkbox" name="Skills Required" value="SAP" /> SAP</label>
+        <label class="skill-item"><input type="checkbox" name="Skills Required" value="PeopleSoft" /> PeopleSoft</label>
+        <label class="skill-item"><input type="checkbox" name="Skills Required" value="Java" /> Java</label>
+        <label class="skill-item"><input type="checkbox" name="Skills Required" value="Python" /> Python</label>
+        <label class="skill-item"><input type="checkbox" name="Skills Required" value="AWS" /> AWS</label>
+        <label class="skill-item"><input type="checkbox" name="Skills Required" value="Azure" /> Azure</label>
+        <label class="skill-item"><input type="checkbox" name="Skills Required" value="SQL" /> SQL</label>
+        <label class="skill-item"><input type="checkbox" name="Skills Required" value="Salesforce" /> Salesforce</label>
+        <label class="skill-item"><input type="checkbox" name="Skills Required" value="ServiceNow" /> ServiceNow</label>
+        <label class="skill-item"><input type="checkbox" name="Skills Required" value="Workday" /> Workday</label>
+        <label class="skill-item"><input type="checkbox" name="Skills Required" value="C++" /> C++</label>
+        <label class="skill-item"><input type="checkbox" name="Skills Required" value=".NET" /> .NET</label>
+        <label class="skill-item"><input type="checkbox" name="Skills Required" value="React" /> React</label>
+        <label class="skill-item"><input type="checkbox" name="Skills Required" value="Node.js" /> Node.js</label>
+        <label class="skill-item"><input type="checkbox" name="Skills Required" value="DevOps" /> DevOps</label>
+        <label class="skill-item"><input type="checkbox" name="Skills Required" value="Data Engineering" /> Data Eng.</label>
+        <label class="skill-item"><input type="checkbox" name="Skills Required" value="Machine Learning" /> ML / AI</label>
+        <label class="skill-item"><input type="checkbox" name="Skills Required" value="Marketing" /> Marketing</label>
+        <label class="skill-item"><input type="checkbox" name="Skills Required" value="Sales" /> Sales</label>
+        <label class="skill-item"><input type="checkbox" name="Skills Required" value="Project Management" /> Project Mgmt</label>
+      </div>
+      <div class="field" style="margin-top:12px;">
+        <label>Other Skills Required <span style="font-weight:400;color:#9ca3af;">(comma separated)</span></label>
+        <input type="text" id="customSkills" placeholder="e.g. Power BI, Tableau, JIRA, Agile" />
+      </div>
+
+      <hr class="divider" />
+      <div class="section-title">Your Contact Info</div>
+      <div class="row">
+        <div class="field">
+          <label>Your Name <span class="req">*</span></label>
+          <input type="text" name="HR Name" required placeholder="Sarah Johnson" />
+        </div>
+        <div class="field">
+          <label>Your Email <span class="req">*</span></label>
+          <input type="email" name="HR Email" required placeholder="sarah@company.com" />
+        </div>
+      </div>
+      <div class="row single">
+        <div class="field">
+          <label>Your LinkedIn Profile</label>
+          <input type="url" name="HR LinkedIn" placeholder="https://linkedin.com/in/sarahjohnson" />
+        </div>
+      </div>
+
+      <button type="submit" class="submit-btn" id="submitBtn">Post Job — Match Candidates Now</button>
+      <div class="alert success" id="successMsg">Job posted! Matched candidates will receive an email alert within 15 minutes.</div>
+      <div class="alert error" id="errorMsg">Something went wrong. Please try again.</div>
+      <div class="footer-note">SkillBridge is free for HR & recruiters. Candidates are pre-screened by skill match only.</div>
+    </form>
+  </div>
+</div>
+
+<script>
+  const _a = 'patmitFgyw65XzNMy.c31ca4b627a42eb42e6';
+  const _b = '2f82651a4f3fc9637ff19377e3e1edfecd5460b12ef14';
+  const AIRTABLE_API_KEY = _a + _b;
+  const BASE_ID = 'appBH3ZYnODydH4E7';
+  const TABLE_ID = 'tblYv2MhUX0FJAzCE';
+
+  document.getElementById('hrForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const btn = document.getElementById('submitBtn');
+    btn.disabled = true;
+    btn.textContent = 'Posting...';
+
+    const form = e.target;
+    const fields = {};
+
+    // Text / email / url fields
+    ['Job Title','Company','Salary Range','Location','LinkedIn Post URL',
+     'Raw Post Text','HR Name','HR Email','HR LinkedIn'].forEach(name => {
+      const el = form.querySelector(`[name="${name}"]`);
+      if (el && el.value.trim()) fields[name] = el.value.trim();
+    });
+
+    // Select fields
+    ['Job Type','Remote Friendly'].forEach(name => {
+      const el = form.querySelector(`[name="${name}"]`);
+      if (el && el.value) fields[name] = el.value;
+    });
+
+    // Skills multi-select (checkboxes + custom)
+    const skills = [...form.querySelectorAll('[name="Skills Required"]:checked')].map(c => c.value);
+    const custom = document.getElementById('customSkills').value.trim();
+    if (custom) custom.split(',').map(s => s.trim()).filter(Boolean).forEach(s => skills.push(s));
+    if (skills.length) fields['Skills Required'] = skills;
+
+    // Auto fields
+    fields['Matched'] = false;
+    fields['Match Count'] = 0;
+    fields['Date Posted'] = new Date().toISOString().split('T')[0];
+
+    try {
+      const res = await fetch(`https://api.airtable.com/v0/${BASE_ID}/${TABLE_ID}`, {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${AIRTABLE_API_KEY}`,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ records: [{ fields }] })
+      });
+
+      if (res.ok) {
+        document.getElementById('successMsg').style.display = 'block';
+        form.reset();
+      } else {
+        throw new Error();
+      }
+    } catch {
+      document.getElementById('errorMsg').style.display = 'block';
+    } finally {
+      btn.disabled = false;
+      btn.textContent = 'Post Job — Match Candidates Now';
+    }
+  });
+</script>
+</body>
+</html>

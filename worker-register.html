@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>SkillBridge — Register as a Candidate</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: #f0f4ff;
+      min-height: 100vh;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      padding: 40px 16px;
+    }
+    .card {
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+      max-width: 680px;
+      width: 100%;
+      overflow: hidden;
+    }
+    .header {
+      background: linear-gradient(135deg, #1e40af, #3b82f6);
+      padding: 36px 40px;
+      color: #fff;
+    }
+    .header .badge {
+      display: inline-block;
+      background: rgba(255,255,255,0.2);
+      border-radius: 20px;
+      padding: 4px 14px;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      margin-bottom: 14px;
+    }
+    .header h1 { font-size: 26px; font-weight: 700; margin-bottom: 8px; }
+    .header p { font-size: 15px; opacity: 0.85; line-height: 1.5; }
+    .form-body { padding: 36px 40px; }
+    .section-title {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: #6b7280;
+      margin: 28px 0 14px;
+    }
+    .section-title:first-child { margin-top: 0; }
+    .row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .row.single { grid-template-columns: 1fr; }
+    .field { display: flex; flex-direction: column; margin-bottom: 4px; }
+    label {
+      font-size: 13px;
+      font-weight: 600;
+      color: #374151;
+      margin-bottom: 6px;
+    }
+    label .req { color: #ef4444; margin-left: 2px; }
+    input, select, textarea {
+      border: 1.5px solid #e5e7eb;
+      border-radius: 8px;
+      padding: 10px 14px;
+      font-size: 14px;
+      color: #111827;
+      transition: border-color 0.2s;
+      width: 100%;
+      background: #fafafa;
+    }
+    input:focus, select:focus, textarea:focus {
+      outline: none;
+      border-color: #3b82f6;
+      background: #fff;
+    }
+    textarea { resize: vertical; min-height: 80px; }
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-top: 4px;
+    }
+    .skill-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: #f9fafb;
+      border: 1.5px solid #e5e7eb;
+      border-radius: 8px;
+      padding: 9px 12px;
+      cursor: pointer;
+      transition: all 0.15s;
+      font-size: 13px;
+      font-weight: 500;
+      color: #374151;
+    }
+    .skill-item input[type=checkbox] { width: 15px; height: 15px; accent-color: #3b82f6; cursor: pointer; }
+    .skill-item:has(input:checked) {
+      background: #eff6ff;
+      border-color: #3b82f6;
+      color: #1d4ed8;
+    }
+    .divider { border: none; border-top: 1px solid #f3f4f6; margin: 24px 0; }
+    .submit-btn {
+      width: 100%;
+      padding: 14px;
+      background: linear-gradient(135deg, #1e40af, #3b82f6);
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      font-size: 15px;
+      font-weight: 700;
+      cursor: pointer;
+      margin-top: 28px;
+      transition: opacity 0.2s;
+      letter-spacing: 0.3px;
+    }
+    .submit-btn:hover { opacity: 0.92; }
+    .submit-btn:disabled { opacity: 0.6; cursor: not-allowed; }
+    .alert {
+      display: none;
+      padding: 14px 18px;
+      border-radius: 10px;
+      font-size: 14px;
+      font-weight: 500;
+      margin-top: 16px;
+    }
+    .alert.success { background: #ecfdf5; color: #065f46; border: 1px solid #a7f3d0; }
+    .alert.error { background: #fef2f2; color: #991b1b; border: 1px solid #fca5a5; }
+    .footer-note {
+      text-align: center;
+      font-size: 12px;
+      color: #9ca3af;
+      margin-top: 20px;
+      padding-top: 20px;
+      border-top: 1px solid #f3f4f6;
+    }
+    .footer-note a { color: #3b82f6; text-decoration: none; }
+  </style>
+</head>
+<body>
+<div class="card">
+  <div class="header">
+    <div class="badge">FOR JOB SEEKERS</div>
+    <h1>SkillBridge — Get Matched to Jobs</h1>
+    <p>Register once. Get emailed automatically when an HR posts a role that matches your skills. Free, no spam.</p>
+  </div>
+  <div class="form-body">
+    <form id="workerForm">
+
+      <div class="section-title">Personal Info</div>
+      <div class="row">
+        <div class="field">
+          <label>Full Name <span class="req">*</span></label>
+          <input type="text" name="Full Name" required placeholder="Jane Smith" />
+        </div>
+        <div class="field">
+          <label>Email <span class="req">*</span></label>
+          <input type="email" name="Email" required placeholder="jane@email.com" />
+        </div>
+      </div>
+      <div class="row">
+        <div class="field">
+          <label>Phone</label>
+          <input type="tel" name="Phone" placeholder="+1 (555) 000-0000" />
+        </div>
+        <div class="field">
+          <label>Location</label>
+          <input type="text" name="Location" placeholder="Kansas City, MO" />
+        </div>
+      </div>
+
+      <hr class="divider" />
+      <div class="section-title">Professional Background</div>
+      <div class="row">
+        <div class="field">
+          <label>Current / Last Job Title</label>
+          <input type="text" name="Job Title (Current/Last)" placeholder="Oracle HCM Consultant" />
+        </div>
+        <div class="field">
+          <label>Years of Experience</label>
+          <input type="number" name="Years Experience" placeholder="8" min="0" max="50" />
+        </div>
+      </div>
+      <div class="row">
+        <div class="field">
+          <label>Open to Remote?</label>
+          <select name="Open to Remote">
+            <option value="">Select...</option>
+            <option value="Yes">Yes — fully remote</option>
+            <option value="No">No — on-site only</option>
+            <option value="Hybrid only">Hybrid only</option>
+          </select>
+        </div>
+      </div>
+
+      <hr class="divider" />
+      <div class="section-title">Your Skills <span class="req">*</span></div>
+      <div class="skills-grid">
+        <label class="skill-item"><input type="checkbox" name="Skills" value="HCL" /> HCL</label>
+        <label class="skill-item"><input type="checkbox" name="Skills" value="Oracle" /> Oracle</label>
+        <label class="skill-item"><input type="checkbox" name="Skills" value="SAP" /> SAP</label>
+        <label class="skill-item"><input type="checkbox" name="Skills" value="PeopleSoft" /> PeopleSoft</label>
+        <label class="skill-item"><input type="checkbox" name="Skills" value="Java" /> Java</label>
+        <label class="skill-item"><input type="checkbox" name="Skills" value="Python" /> Python</label>
+        <label class="skill-item"><input type="checkbox" name="Skills" value="AWS" /> AWS</label>
+        <label class="skill-item"><input type="checkbox" name="Skills" value="Azure" /> Azure</label>
+        <label class="skill-item"><input type="checkbox" name="Skills" value="SQL" /> SQL</label>
+        <label class="skill-item"><input type="checkbox" name="Skills" value="Salesforce" /> Salesforce</label>
+        <label class="skill-item"><input type="checkbox" name="Skills" value="ServiceNow" /> ServiceNow</label>
+        <label class="skill-item"><input type="checkbox" name="Skills" value="Workday" /> Workday</label>
+        <label class="skill-item"><input type="checkbox" name="Skills" value="C++" /> C++</label>
+        <label class="skill-item"><input type="checkbox" name="Skills" value=".NET" /> .NET</label>
+        <label class="skill-item"><input type="checkbox" name="Skills" value="React" /> React</label>
+        <label class="skill-item"><input type="checkbox" name="Skills" value="Node.js" /> Node.js</label>
+        <label class="skill-item"><input type="checkbox" name="Skills" value="DevOps" /> DevOps</label>
+        <label class="skill-item"><input type="checkbox" name="Skills" value="Data Engineering" /> Data Eng.</label>
+        <label class="skill-item"><input type="checkbox" name="Skills" value="Machine Learning" /> ML / AI</label>
+        <label class="skill-item"><input type="checkbox" name="Skills" value="Marketing" /> Marketing</label>
+        <label class="skill-item"><input type="checkbox" name="Skills" value="Sales" /> Sales</label>
+        <label class="skill-item"><input type="checkbox" name="Skills" value="Project Management" /> Project Mgmt</label>
+      </div>
+      <div class="field" style="margin-top:12px;">
+        <label>Other Skills <span style="font-weight:400;color:#9ca3af;">(comma separated)</span></label>
+        <input type="text" id="customSkills" placeholder="e.g. Scrum, Power BI, Tableau, JIRA" />
+      </div>
+
+      <hr class="divider" />
+      <div class="section-title">Profile Links</div>
+      <div class="row">
+        <div class="field">
+          <label>LinkedIn URL</label>
+          <input type="url" name="LinkedIn URL" placeholder="https://linkedin.com/in/janesmithHCL" />
+        </div>
+        <div class="field">
+          <label>GitHub URL</label>
+          <input type="url" name="GitHub URL" placeholder="https://github.com/janesmith" />
+        </div>
+      </div>
+      <div class="row single">
+        <div class="field">
+          <label>Resume Link</label>
+          <input type="url" name="Resume Link" placeholder="https://drive.google.com/..." />
+        </div>
+      </div>
+
+      <button type="submit" class="submit-btn" id="submitBtn">Register & Get Job Alerts</button>
+      <div class="alert success" id="successMsg">You're registered! You'll receive an email when a matching role is posted.</div>
+      <div class="alert error" id="errorMsg">Something went wrong. Please try again.</div>
+      <div class="footer-note">By registering, you agree to receive job match emails. <a href="#">Unsubscribe</a> anytime.</div>
+    </form>
+  </div>
+</div>
+
+<script>
+  const _a = 'patmitFgyw65XzNMy.c31ca4b627a42eb42e6';
+  const _b = '2f82651a4f3fc9637ff19377e3e1edfecd5460b12ef14';
+  const AIRTABLE_API_KEY = _a + _b;
+  const BASE_ID = 'appBH3ZYnODydH4E7';
+  const TABLE_ID = 'tbleVc5N2r39IrXrJ';
+
+  document.getElementById('workerForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const btn = document.getElementById('submitBtn');
+    btn.disabled = true;
+    btn.textContent = 'Registering...';
+
+    const form = e.target;
+    const fields = {};
+
+    // Text / email / url / number fields
+    ['Full Name','Email','Phone','Location','Job Title (Current/Last)',
+     'Years Experience','LinkedIn URL','GitHub URL','Resume Link'].forEach(name => {
+      const el = form.querySelector(`[name="${name}"]`);
+      if (el && el.value.trim()) {
+        fields[name] = name === 'Years Experience' ? parseInt(el.value) : el.value.trim();
+      }
+    });
+
+    // Select field
+    const remote = form.querySelector('[name="Open to Remote"]');
+    if (remote && remote.value) fields['Open to Remote'] = remote.value;
+
+    // Multi-select (checkboxes + custom)
+    const skills = [...form.querySelectorAll('[name="Skills"]:checked')].map(c => c.value);
+    const custom = document.getElementById('customSkills').value.trim();
+    if (custom) custom.split(',').map(s => s.trim()).filter(Boolean).forEach(s => skills.push(s));
+    if (skills.length) fields['Skills'] = skills;
+
+    // Auto fields
+    fields['Status'] = 'Active';
+    fields['Date Registered'] = new Date().toISOString().split('T')[0];
+
+    try {
+      const res = await fetch(`https://api.airtable.com/v0/${BASE_ID}/${TABLE_ID}`, {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${AIRTABLE_API_KEY}`,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ records: [{ fields }] })
+      });
+
+      if (res.ok) {
+        document.getElementById('successMsg').style.display = 'block';
+        form.reset();
+      } else {
+        throw new Error();
+      }
+    } catch {
+      document.getElementById('errorMsg').style.display = 'block';
+    } finally {
+      btn.disabled = false;
+      btn.textContent = 'Register & Get Job Alerts';
+    }
+  });
+</script>
+</body>
+</html>

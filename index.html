@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>SkillBridge — Get Matched. Get Hired.</title>
+  <meta name="description" content="Free skill-matching platform connecting laid-off tech professionals with open roles. HR posts a job, we match and email qualified candidates instantly." />
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: #fff;
+      color: #111827;
+    }
+
+    /* NAV */
+    nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 48px;
+      border-bottom: 1px solid #f3f4f6;
+      position: sticky;
+      top: 0;
+      background: rgba(255,255,255,0.95);
+      backdrop-filter: blur(8px);
+      z-index: 100;
+    }
+    .logo { font-size: 20px; font-weight: 800; color: #1e40af; letter-spacing: -0.5px; }
+    .logo span { color: #10b981; }
+    .nav-links { display: flex; gap: 12px; }
+    .nav-btn {
+      padding: 9px 20px;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.15s;
+    }
+    .nav-btn.outline {
+      border: 1.5px solid #1e40af;
+      color: #1e40af;
+    }
+    .nav-btn.outline:hover { background: #eff6ff; }
+    .nav-btn.solid {
+      background: #1e40af;
+      color: #fff;
+    }
+    .nav-btn.solid:hover { background: #1d3d9e; }
+
+    /* HERO */
+    .hero {
+      background: linear-gradient(160deg, #eff6ff 0%, #ecfdf5 100%);
+      padding: 90px 48px 80px;
+      text-align: center;
+    }
+    .hero .eyebrow {
+      display: inline-block;
+      background: #dbeafe;
+      color: #1d4ed8;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      padding: 5px 14px;
+      border-radius: 20px;
+      margin-bottom: 20px;
+    }
+    .hero h1 {
+      font-size: 54px;
+      font-weight: 800;
+      line-height: 1.1;
+      letter-spacing: -1.5px;
+      margin-bottom: 20px;
+      color: #0f172a;
+    }
+    .hero h1 span { color: #1e40af; }
+    .hero p {
+      font-size: 18px;
+      color: #4b5563;
+      max-width: 560px;
+      margin: 0 auto 40px;
+      line-height: 1.6;
+    }
+    .hero-btns {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .hero-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 16px 32px;
+      border-radius: 12px;
+      font-size: 16px;
+      font-weight: 700;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+    .hero-btn.blue {
+      background: linear-gradient(135deg, #1e40af, #3b82f6);
+      color: #fff;
+      box-shadow: 0 4px 16px rgba(30,64,175,0.3);
+    }
+    .hero-btn.blue:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(30,64,175,0.35); }
+    .hero-btn.green {
+      background: linear-gradient(135deg, #065f46, #10b981);
+      color: #fff;
+      box-shadow: 0 4px 16px rgba(16,185,129,0.3);
+    }
+    .hero-btn.green:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(16,185,129,0.35); }
+    .hero-sub { font-size: 13px; color: #9ca3af; margin-top: 20px; }
+
+    /* STATS */
+    .stats {
+      display: flex;
+      justify-content: center;
+      gap: 60px;
+      padding: 48px;
+      border-bottom: 1px solid #f3f4f6;
+      flex-wrap: wrap;
+    }
+    .stat { text-align: center; }
+    .stat .num { font-size: 36px; font-weight: 800; color: #1e40af; letter-spacing: -1px; }
+    .stat .label { font-size: 13px; color: #6b7280; margin-top: 4px; }
+
+    /* HOW IT WORKS */
+    .section { padding: 80px 48px; }
+    .section-header { text-align: center; margin-bottom: 56px; }
+    .section-header .tag {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: #10b981;
+      margin-bottom: 12px;
+    }
+    .section-header h2 {
+      font-size: 36px;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      color: #0f172a;
+    }
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .step {
+      text-align: center;
+      padding: 32px 24px;
+      border-radius: 16px;
+      background: #f9fafb;
+      border: 1px solid #f3f4f6;
+    }
+    .step .icon {
+      width: 52px;
+      height: 52px;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      margin: 0 auto 16px;
+    }
+    .step .icon.blue { background: #dbeafe; }
+    .step .icon.green { background: #d1fae5; }
+    .step .icon.purple { background: #ede9fe; }
+    .step h3 { font-size: 16px; font-weight: 700; margin-bottom: 8px; }
+    .step p { font-size: 14px; color: #6b7280; line-height: 1.6; }
+
+    /* TWO COLUMNS CTA */
+    .dual-cta {
+      background: #f9fafb;
+      padding: 80px 48px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+    .cta-card {
+      background: #fff;
+      border-radius: 20px;
+      padding: 40px 36px;
+      border: 1.5px solid #e5e7eb;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .cta-card .card-icon { font-size: 36px; }
+    .cta-card h3 { font-size: 22px; font-weight: 800; }
+    .cta-card p { font-size: 14px; color: #6b7280; line-height: 1.6; flex: 1; }
+    .cta-card ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .cta-card ul li {
+      font-size: 13px;
+      color: #374151;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .cta-card ul li::before { content: "✓"; font-weight: 700; color: #10b981; }
+    .cta-link {
+      display: block;
+      text-align: center;
+      padding: 14px;
+      border-radius: 10px;
+      font-size: 15px;
+      font-weight: 700;
+      text-decoration: none;
+      margin-top: 8px;
+      transition: opacity 0.2s;
+    }
+    .cta-link:hover { opacity: 0.88; }
+    .cta-link.blue { background: linear-gradient(135deg, #1e40af, #3b82f6); color: #fff; }
+    .cta-link.green { background: linear-gradient(135deg, #065f46, #10b981); color: #fff; }
+
+    /* SKILLS BADGE CLOUD */
+    .skills-section { padding: 60px 48px; text-align: center; background: #fff; }
+    .skills-section h2 { font-size: 22px; font-weight: 700; color: #374151; margin-bottom: 24px; }
+    .skill-cloud { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; max-width: 700px; margin: 0 auto; }
+    .skill-badge {
+      background: #f3f4f6;
+      color: #374151;
+      border-radius: 20px;
+      padding: 7px 16px;
+      font-size: 13px;
+      font-weight: 600;
+      border: 1px solid #e5e7eb;
+    }
+
+    /* FOOTER */
+    footer {
+      text-align: center;
+      padding: 32px 48px;
+      border-top: 1px solid #f3f4f6;
+      font-size: 13px;
+      color: #9ca3af;
+    }
+
+    @media (max-width: 640px) {
+      nav { padding: 16px 20px; }
+      .hero { padding: 60px 20px; }
+      .hero h1 { font-size: 36px; }
+      .stats { gap: 32px; padding: 32px 20px; }
+      .section { padding: 60px 20px; }
+      .steps { grid-template-columns: 1fr; }
+      .dual-cta { grid-template-columns: 1fr; padding: 40px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="logo">Skill<span>Bridge</span></div>
+    <div class="nav-links">
+      <a href="worker-register.html" class="nav-btn outline">Find Jobs</a>
+      <a href="hr-post-job.html" class="nav-btn solid">Post a Job</a>
+    </div>
+  </nav>
+
+  <section class="hero">
+    <div class="eyebrow">Free Job Matching Platform</div>
+    <h1>Your Skills.<br/><span>Your Next Job.</span></h1>
+    <p>We match laid-off tech professionals with open roles — automatically. HR posts a job, qualified candidates get emailed within minutes.</p>
+    <div class="hero-btns">
+      <a href="worker-register.html" class="hero-btn blue">
+        👤 I'm Looking for Work
+      </a>
+      <a href="hr-post-job.html" class="hero-btn green">
+        💼 I'm Hiring
+      </a>
+    </div>
+    <p class="hero-sub">Free for everyone. No recruiter fees. No spam.</p>
+  </section>
+
+  <div class="stats">
+    <div class="stat"><div class="num">22+</div><div class="label">Skills tracked</div></div>
+    <div class="stat"><div class="num">&lt;15m</div><div class="label">Match time</div></div>
+    <div class="stat"><div class="num">100%</div><div class="label">Free</div></div>
+    <div class="stat"><div class="num">0</div><div class="label">Recruiter fees</div></div>
+  </div>
+
+  <section class="section">
+    <div class="section-header">
+      <div class="tag">How It Works</div>
+      <h2>Simple. Fast. Automatic.</h2>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <div class="icon blue">📋</div>
+        <h3>Register Your Skills</h3>
+        <p>Candidates fill out a quick form with their skills, experience, and profile links.</p>
+      </div>
+      <div class="step">
+        <div class="icon green">📢</div>
+        <h3>HR Posts a Role</h3>
+        <p>HR fills a simple form with the job details and skills required. Takes 2 minutes.</p>
+      </div>
+      <div class="step">
+        <div class="icon purple">⚡</div>
+        <h3>Instant Match & Email</h3>
+        <p>Our system matches skills and emails every qualified candidate within 15 minutes.</p>
+      </div>
+    </div>
+  </section>
+
+  <div style="background:#f9fafb; padding: 80px 48px;">
+    <div style="max-width:900px; margin:0 auto; display:grid; grid-template-columns:1fr 1fr; gap:24px;">
+      <div class="cta-card">
+        <div class="card-icon">👤</div>
+        <h3>For Job Seekers</h3>
+        <p>Recently laid off? Register once and get emailed every time a matching role is posted.</p>
+        <ul>
+          <li>Register in under 3 minutes</li>
+          <li>Get alerts for exact skill matches</li>
+          <li>Add LinkedIn, GitHub & resume</li>
+          <li>Unsubscribe anytime</li>
+        </ul>
+        <a href="worker-register.html" class="cta-link blue">Register Now — It's Free</a>
+      </div>
+      <div class="cta-card">
+        <div class="card-icon">💼</div>
+        <h3>For HR & Recruiters</h3>
+        <p>Skip the search. Post your role and we'll send it directly to candidates with matching skills.</p>
+        <ul>
+          <li>Post a job in 2 minutes</li>
+          <li>Reach pre-screened candidates</li>
+          <li>No cost, no account needed</li>
+          <li>Candidates contact you directly</li>
+        </ul>
+        <a href="hr-post-job.html" class="cta-link green">Post a Job Opening</a>
+      </div>
+    </div>
+  </div>
+
+  <section class="skills-section">
+    <h2>Skills We Match</h2>
+    <div class="skill-cloud">
+      <span class="skill-badge">HCL</span>
+      <span class="skill-badge">Oracle</span>
+      <span class="skill-badge">SAP</span>
+      <span class="skill-badge">PeopleSoft</span>
+      <span class="skill-badge">Java</span>
+      <span class="skill-badge">Python</span>
+      <span class="skill-badge">AWS</span>
+      <span class="skill-badge">Azure</span>
+      <span class="skill-badge">SQL</span>
+      <span class="skill-badge">Salesforce</span>
+      <span class="skill-badge">ServiceNow</span>
+      <span class="skill-badge">Workday</span>
+      <span class="skill-badge">C++</span>
+      <span class="skill-badge">.NET</span>
+      <span class="skill-badge">React</span>
+      <span class="skill-badge">Node.js</span>
+      <span class="skill-badge">DevOps</span>
+      <span class="skill-badge">Data Engineering</span>
+      <span class="skill-badge">Machine Learning</span>
+      <span class="skill-badge">Marketing</span>
+      <span class="skill-badge">Sales</span>
+      <span class="skill-badge">Project Management</span>
+      <span class="skill-badge">+ your custom skills</span>
+    </div>
+  </section>
+
+  <footer>
+    &copy; 2026 SkillBridge — Built to help people land faster.
+  </footer>
+
+</body>
+</html>
