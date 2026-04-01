@@ -76,6 +76,17 @@
       background: #fff;
     }
     textarea { resize: vertical; min-height: 100px; }
+    .skill-group-label {
+      grid-column: 1 / -1;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #9ca3af;
+      margin-top: 10px;
+      margin-bottom: 2px;
+      padding-left: 2px;
+    }
     .skills-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -218,25 +229,36 @@
       <hr class="divider" />
       <div class="section-title">Skills Required <span class="req">*</span></div>
       <div class="skills-grid">
-        <label class="skill-item"><input type="checkbox" name="Skills Required" value="HCL" /> HCL</label>
+        <div class="skill-group-label">ERP / Enterprise</div>
         <label class="skill-item"><input type="checkbox" name="Skills Required" value="Oracle" /> Oracle</label>
         <label class="skill-item"><input type="checkbox" name="Skills Required" value="SAP" /> SAP</label>
         <label class="skill-item"><input type="checkbox" name="Skills Required" value="PeopleSoft" /> PeopleSoft</label>
-        <label class="skill-item"><input type="checkbox" name="Skills Required" value="Java" /> Java</label>
-        <label class="skill-item"><input type="checkbox" name="Skills Required" value="Python" /> Python</label>
+        <label class="skill-item"><input type="checkbox" name="Skills Required" value="HCL" /> HCL</label>
+        <label class="skill-item"><input type="checkbox" name="Skills Required" value="Workday" /> Workday</label>
+        <label class="skill-item"><input type="checkbox" name="Skills Required" value="ServiceNow" /> ServiceNow</label>
+
+        <div class="skill-group-label">Cloud</div>
         <label class="skill-item"><input type="checkbox" name="Skills Required" value="AWS" /> AWS</label>
         <label class="skill-item"><input type="checkbox" name="Skills Required" value="Azure" /> Azure</label>
-        <label class="skill-item"><input type="checkbox" name="Skills Required" value="SQL" /> SQL</label>
-        <label class="skill-item"><input type="checkbox" name="Skills Required" value="Salesforce" /> Salesforce</label>
-        <label class="skill-item"><input type="checkbox" name="Skills Required" value="ServiceNow" /> ServiceNow</label>
-        <label class="skill-item"><input type="checkbox" name="Skills Required" value="Workday" /> Workday</label>
+        <label class="skill-item"><input type="checkbox" name="Skills Required" value="DevOps" /> DevOps</label>
+
+        <div class="skill-group-label">Programming</div>
+        <label class="skill-item"><input type="checkbox" name="Skills Required" value="Java" /> Java</label>
+        <label class="skill-item"><input type="checkbox" name="Skills Required" value="Python" /> Python</label>
         <label class="skill-item"><input type="checkbox" name="Skills Required" value="C++" /> C++</label>
         <label class="skill-item"><input type="checkbox" name="Skills Required" value=".NET" /> .NET</label>
         <label class="skill-item"><input type="checkbox" name="Skills Required" value="React" /> React</label>
         <label class="skill-item"><input type="checkbox" name="Skills Required" value="Node.js" /> Node.js</label>
-        <label class="skill-item"><input type="checkbox" name="Skills Required" value="DevOps" /> DevOps</label>
+
+        <div class="skill-group-label">Data</div>
+        <label class="skill-item"><input type="checkbox" name="Skills Required" value="SQL" /> SQL</label>
         <label class="skill-item"><input type="checkbox" name="Skills Required" value="Data Engineering" /> Data Eng.</label>
         <label class="skill-item"><input type="checkbox" name="Skills Required" value="Machine Learning" /> ML / AI</label>
+
+        <div class="skill-group-label">Platform</div>
+        <label class="skill-item"><input type="checkbox" name="Skills Required" value="Salesforce" /> Salesforce</label>
+
+        <div class="skill-group-label">Business</div>
         <label class="skill-item"><input type="checkbox" name="Skills Required" value="Marketing" /> Marketing</label>
         <label class="skill-item"><input type="checkbox" name="Skills Required" value="Sales" /> Sales</label>
         <label class="skill-item"><input type="checkbox" name="Skills Required" value="Project Management" /> Project Mgmt</label>
